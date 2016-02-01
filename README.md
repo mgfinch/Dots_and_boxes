@@ -45,8 +45,9 @@ change the training process.
 by loading Q and using function `get_Q_move_and_update` to get moves 
 in play.py on line 329. inserting 
 
-```move,update = get_Q_move_and_update(Q,board,l_rate=0,random_move_prob=1)
-   selected_x, selected_y = move
+```
+move,update = get_Q_move_and_update(Q,board,l_rate=0,random_move_prob=1)
+selected_x, selected_y = move
 ```
 instead of currend code for getting bot moves.
 
