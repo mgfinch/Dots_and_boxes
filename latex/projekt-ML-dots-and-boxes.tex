@@ -248,30 +248,32 @@ Skúsme teraz ako sa budú správať, ak ich natrénujeme ešte navyše o ďalš
 \bigskip
 
 Posledný test bude o tom, či je náša metóda schopná poraziť dosť dobrého hráča \textbf{Bot\_2(10)}, a ak áno, koľko trénovania na to potrebuje.
-Budeme trénovať po 5000 zápasov až kým ho na tejto vzorke 5000 zápasov neprekonáme (t.j. nezískame výsledok aspoň [2501, 2499])
+Budeme trénovať po 5000 zápasov až kým ho na vzorke 100 zápasov neprekonáme (t.j. nezískame výsledok aspoň [51, 49])
+Bot2(10) je dosť dobrý, keďže prvých 14 ťahov hrá opatrne pomocou \textit{always4never3} a posledných 10 hrá optimálne. 
+Celkovo má hra $2^{24}>16$ miliónov stavov, a v každej hre prejdeme náhodných 12 a 12 cielených väčšinou už navštívených, tak ak sa ho naučí poraziť po 200 kolách, asi to už nemá zmysel.
 
-\begin{tabular}{l|l}
-\textbf{Kolo} 	&	výsledok 	\\ \hline
-	0.			&	[20, 4980]	\\
-	1.			&	[50, 4950]	\\
-	2.			&	[55, 4945]	\\
-%	1.			&	[50, 4950]	\\
-%	1.			&	[50, 4950]	\\
-%	1.			&	[50, 4950]	\\
-%	1.			&	[50, 4950]	\\
-%	1.			&	[50, 4950]	\\
-\end{tabular}
+Prvých 50 kôl sa veľa nenaučil, v priemere vyhrá len trošku viac ako 2 zo 100.
+
+
+Vyzerá, že takýto hráčsky tréning nie je zďaleka taký účinný ako mysliteľský (aspoň na takejto malej ploche). V takomto čase čo trvá trénovanie 500 000 hier by sme možno natrénovali aj kompletného \textbf{Bot\_2(24)}. 
+
+\section{Záver} 
+
+Najlepší hráč, ktorý pri tomto projekte vznikol bol \textit{bot\_2(k)}, ktorý využíva na začiatku heuristiku a posledných $k$ ťahov hrá optimálne.
+
+Podarilo sa nám vytvoriť aj postupne online učiaceho sa agenta, ktorý sa celkom dobre učí od slabších agentov, a rýchlo ich prekonáva, no ktorý však nie je schopný konkurovať vyššie uvedenému hráčovi. 
+
 
 \section*{Zdroje}
 
 \begin{enumerate}
 \renewcommand*\labelenumi{[\theenumi]}
 
-\item Deep box - dots and boxes,  {https://github.com/Normangorman/DeepBox}
+\item Deep box - dots and boxes, \ {https://github.com/Normangorman/DeepBox}
 \label{deepBox}
-\item Dots and boxes - terminal GUI, {https://gist.github.com/stephenroller/3163995}
+\item Dots and boxes - terminal GUI, \ {https://gist.github.com/stephenroller/3163995}
 \label{GUI} 
-\item Scikit-learn documentation 
+\item Scikit-learn documentation, \ http://scikit-learn.org/
 \label{skLearnDoc}
 
 

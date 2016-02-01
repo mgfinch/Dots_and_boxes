@@ -72,14 +72,7 @@ def first_available_move(board):
     except IndexError:
         return False
         
-        
-    
-def get_random_move(board):
-    
-    potential_moves = get_potential_moves(board)
-    ind = randint(0,len(potential_moves)-1)
-    return(potential_moves[ind])
-    
+         
     
 def get_potential_moves(board):
     

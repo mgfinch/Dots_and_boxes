@@ -17,6 +17,13 @@ def get_first_completing_move(board):
     return(False)                
                 
 
+def get_random_move(board):
+    
+    potential_moves = get_potential_moves(board)
+    ind = randint(0,len(potential_moves)-1)
+    return(potential_moves[ind])
+   
+
 
 def always4never3(board):
     move = get_first_completing_move(board)

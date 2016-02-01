@@ -4,7 +4,7 @@ from dots_and_boxes import *
 
 
 
-def get_Q_move_and_update(Q,board,l_rate=1,random_move_prob=2):
+def get_Q_move_and_update(Q,board,l_rate=1,random_move_prob=1):
     # l_rate is the learning rate
     # random_move_prob ~ one of how many moves will not be random
 
@@ -163,26 +163,36 @@ def player_move(board,Qedge,k,bot):
     return(move)
 
     
-
-Qedge = bot2_load(10) 
-
-# play with parameters and rerun this part :)
-Q,wins = train2(5000,l_rate = 1,random_move_prob = 3, bot = 3)   #training games
-print(wins)
-Q,wins = train2(5000,Q, l_rate = 1,random_move_prob = 2, bot = 3)   #training games
-print(wins)
-Q1,wins = train2(1000,Q, l_rate = 0, random_move_prob = 1, print_score = False, bot = 0) #testing games
-print(wins)
-Q1,wins = train2(1000,Q, l_rate = 0, random_move_prob = 1, print_score = False, bot = 1) #testing games
-print(wins)
-Q1,wins = train2(1000,Q, l_rate = 0, random_move_prob = 1, print_score = False, bot = 2) #testing games
-print(wins)
-Q1,wins = train2(1000,Q, l_rate = 0, random_move_prob = 1, print_score = False, bot = 3) #testing games
-print(wins)
-
-i = 2
-while wins[0]<wins[1]:
-    Q,wins = train2(5000,Q, l_rate = 1,random_move_prob = 2, bot = 3) 
-    print('Kolo '+ str(i) + ': ' str(wins))
-    i += 1
-
+#    
+#### UNCOMMENT FOR TESTING AND TRAINING BOTS
+#
+#Qedge = bot2_load(10) 
+#
+### play with parameters and rerun this part :)
+##Q,wins = train2(5000,l_rate = 1,random_move_prob = 3, bot = 3)   #training games
+##print(wins)
+##Q,wins = train2(5000,Q, l_rate = 1,random_move_prob = 2, bot = 3)   #training games
+##print(wins)
+##Q1,wins = train2(1000,Q, l_rate = 0, random_move_prob = 1, print_score = False, bot = 0) #testing games
+##print(wins)
+##Q1,wins = train2(1000,Q, l_rate = 0, random_move_prob = 1, print_score = False, bot = 1) #testing games
+##print(wins)
+##Q1,wins = train2(1000,Q, l_rate = 0, random_move_prob = 1, print_score = False, bot = 2) #testing games
+##print(wins)
+##Q1,wins = train2(100,Q, l_rate = 0, random_move_prob = 1, print_score = False, bot = 3) #testing games
+##print(wins)
+#
+#
+#
+## final match!
+#Q,wins = Q,wins = train2(5000,l_rate = 1,random_move_prob = 3, bot = 3) 
+#Q1,wins = train2(100,Q, l_rate = 0, random_move_prob = 1, print_score = False, bot = 3) #testing games
+#print('Kolo '+ str(0) + ': ' + str(wins))
+#i = 1
+#while wins[0]<wins[1]:
+#    Q,wins = train2(5000,Q, l_rate = 1,random_move_prob = 2, bot = 3) 
+#    Q1,wins = train2(100,Q, l_rate = 0, random_move_prob = 1, print_score = False, bot = 3) #testing games
+#    print('Kolo '+ str(i) + ': ' + str(wins))
+#    i += 1
+#
+#
