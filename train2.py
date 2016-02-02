@@ -115,25 +115,25 @@ def train2(num_games,Q = None,l_rate=1,random_move_prob=2, print_score=False, bo
             m -= 1
             
         # reconsider the game_moves and update Q if neccessary
-        m = 0
-        board_num = board2num(board) # number of the full board
-        for move in game_moves[::-1]:
-            q_tmp = Q[m][str(board_num)]
-            m += 1
-            board_num -= edge2num(move) 
-            q_old = Q[m][str(board_num)]
-            reward = check_surrounding_squares(board,move,3)
-            if reward: 
-                # it is our move again and we can get at least Q-value of score
-                q_tmp += reward   # we add reward  
-            else: 
-                # it is the opponents move, so Qvalue is the score he can get
-                total_score = get_total_score(board)
-                max_score = (BOARD_SIZE-1)**2
-                q_tmp = (max_score - total_score - q_tmp)
-                
-            q_update = q_old + l_rate*(q_tmp - q_old)
-            Q[m][str(board_num)] = q_update
+#        m = 0
+#        board_num = board2num(board) # number of the full board
+#        for move in game_moves[::-1]:
+#            q_tmp = Q[m][str(board_num)]
+#            m += 1
+#            board_num -= edge2num(move) 
+#            q_old = Q[m][str(board_num)]
+#            reward = check_surrounding_squares(board,move,3)
+#            if reward: 
+#                # it is our move again and we can get at least Q-value of score
+#                q_tmp += reward   # we add reward  
+#            else: 
+#                # it is the opponents move, so Qvalue is the score he can get
+#                total_score = get_total_score(board)
+#                max_score = (BOARD_SIZE-1)**2
+#                q_tmp = (max_score - total_score - q_tmp)
+#                
+#            q_update = q_old + l_rate*(q_tmp - q_old)
+#            Q[m][str(board_num)] = q_update
         
         if print_score: print(score)
         winner = score.index(max(score))
@@ -165,9 +165,9 @@ def player_move(board,Qedge,k,bot):
     
 #    
 #### UNCOMMENT FOR TESTING AND TRAINING BOTS
-#
-#Qedge = bot2_load(10) 
-#
+
+Qedge = bot2_load(10) 
+
 ### play with parameters and rerun this part :)
 ##Q,wins = train2(5000,l_rate = 1,random_move_prob = 3, bot = 3)   #training games
 ##print(wins)
@@ -185,14 +185,16 @@ def player_move(board,Qedge,k,bot):
 #
 #
 ## final match!
-#Q,wins = Q,wins = train2(5000,l_rate = 1,random_move_prob = 3, bot = 3) 
-#Q1,wins = train2(100,Q, l_rate = 0, random_move_prob = 1, print_score = False, bot = 3) #testing games
-#print('Kolo '+ str(0) + ': ' + str(wins))
-#i = 1
-#while wins[0]<wins[1]:
-#    Q,wins = train2(5000,Q, l_rate = 1,random_move_prob = 2, bot = 3) 
-#    Q1,wins = train2(100,Q, l_rate = 0, random_move_prob = 1, print_score = False, bot = 3) #testing games
-#    print('Kolo '+ str(i) + ': ' + str(wins))
-#    i += 1
-#
+Q,wins = Q,wins = train2(5000,l_rate = 1,random_move_prob = 3, bot = 0) 
+Q1,wins = train2(100,Q, l_rate = 0, random_move_prob = 1, print_score = False, bot = 3) #testing games
+print('Kolo '+ str(0) + ': ' + str(wins))
+i = 1
+
+while wins[0]<wins[1]:
+    Q,wins = train2(5000,Q, l_rate = 0.05,random_move_prob = 2, bot = 0) 
+    Q,wins = train2(1000,Q, l_rate = 0.05,random_move_prob = 1, bot = 3) 
+    Q1,wins = train2(100,Q, l_rate = 0, random_move_prob = 1, print_score = False, bot = 3) #testing games
+    print('Kolo '+ str(i) + ': ' + str(wins))
+    i += 1
+
 #

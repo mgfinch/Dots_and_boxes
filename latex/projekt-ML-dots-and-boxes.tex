@@ -257,12 +257,49 @@ Prvých 50 kôl sa veľa nenaučil, v priemere vyhrá len trošku viac ako 2 zo 
 
 Vyzerá, že takýto hráčsky tréning nie je zďaleka taký účinný ako mysliteľský (aspoň na takejto malej ploche). V takomto čase čo trvá trénovanie 500 000 hier by sme možno natrénovali aj kompletného \textbf{Bot\_2(24)}. 
 
+\bigskip
+
+EDIT: Problém bol v nastavení vysokého \textit{learning rate}. Aj v tomto prípade vyzerá, že platí staré známe "pomaly ďalej zájdeš".
+Pretože takto náš hráč rýchlo "zabúda" čo sa naučil, síce všetky nové poznatky ihneď zakomponuje do stratégie, často nimi prepíše dovtedy získané vedomosti.
+Pre potvrdenie tejto hypotézy spravíme experiment.
+Natrénujeme najprv 5000 náhodných hier s learning rate 1, potom budeme v kolách po 5000 hier trénovať 
+s \textit{bot\_2(10)} a testovať na vzorke 100 hier ako sme na tom.
+
+
+\bigskip
+
+\noindent
+\begin{tabular}{c|llll}
+\textbf{Kolo\textbackslash lr}	
+	& 1					& 0.5						& 0.2						& 0.1 	\\ \hline
+
+1	&		[5, 95]		&		[9, 91]				&		[21, 79]			&	[7, 93]			\\
+2	&		[1, 99]		&		[17, 83]			&		[18, 82]			&	[14, 86]			\\
+3	&		[0, 100]	&		[13, 87]			&		[18, 82]			&	[19, 81]			\\
+4	&		[1, 99]		&		[16, 84]			&		[13, 87]			&	[14, 86]			\\	
+5	&		[2, 98]		&		[15, 85]			&		[16, 84]			&	 [11, 89]			\\
+6	&		[0, 100]	&		[12, 88]			&		[12, 88]			&	 [13, 87]			\\
+7	&		[0, 100]	&		[15, 85]			&		[18, 82]			&	 [22, 78]			
+
+\end{tabular}
+\bigskip
+
+Skúšali sme aj nižšie hodnoty, napr. pri 0.05 sa hráč po 14 kolách dostal stabilne na skóre okolo 30.
+
+
 \section{Záver} 
 
 Najlepší hráč, ktorý pri tomto projekte vznikol bol \textit{bot\_2(k)}, ktorý využíva na začiatku heuristiku a posledných $k$ ťahov hrá optimálne.
 
 Podarilo sa nám vytvoriť aj postupne online učiaceho sa agenta, ktorý sa celkom dobre učí od slabších agentov, a rýchlo ich prekonáva, no ktorý však nie je schopný konkurovať vyššie uvedenému hráčovi. 
 
+\bigskip
+
+EDIT: Pri menšom learning rate trénovanie ide pomališie, no takto trénovaný hráč to dotiahne omnoho ďalej. Takže pri správnej voľbe parametrov, je náš model schopný naučiť sa ako prekonať aj tohto pomerne silného bota.
+
+Ak by som tento projekt robil znovu, rozhodne by som chcel stráviť viac času experimentovaním a hraním sa s parametrami (alebo rôznymi modelmi), 
+lebo to je najväčšia zábava a tiež prináša veľa informácii. Zaujímavé by mohlo byť aj skúsiť meniť spôsob updatovania (napr. pridaním parametru $\gamma$).
+Alebo sledovať pri simuláciách nie len počet výhier a prehier ale aj skóre v jednotlivých hrách.
 
 \section*{Zdroje}
 
